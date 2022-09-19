@@ -1,0 +1,179 @@
+[System]
+Name='A1trialfuzzyBall6_2'
+Type='mamdani'
+Version=2.0
+NumInputs=10
+NumOutputs=3
+NumRules=51
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='BallAngle'
+Range=[-3.15 3.15]
+NumMFs=5
+MF1='Quad1':'trapmf',[-1.606 -1.504 -0.14 -0.09]
+MF2='Quad2':'trapmf',[0.09 0.14 1.504 1.606]
+MF3='Quad3':'trapmf',[1.504 1.606 3.11 3.21]
+MF4='Quad4':'trapmf',[-3.21 -3.11 -1.606 -1.504]
+MF5='Straight':'trapmf',[-0.14 -0.09 0.09 0.14]
+
+[Input2]
+Name='BallRange'
+Range=[0 100]
+NumMFs=4
+MF1='VeryClose':'trapmf',[0 0 1 1.1]
+MF2='Close':'trapmf',[0.9 1.1 28 30]
+MF3='Near':'trapmf',[28 30 58 60]
+MF4='Far':'trapmf',[58 60 100 100]
+
+[Input3]
+Name='BallHeld'
+Range=[0 1]
+NumMFs=2
+MF1='False':'trapmf',[0 0 0.49 0.5]
+MF2='True':'trapmf',[0.5 0.51 1 1]
+
+[Input4]
+Name='GoalAngleRightPole'
+Range=[-3.15 3.15]
+NumMFs=3
+MF1='LeftofGoal':'trapmf',[-3.15 -3.14 -0.1 0.01]
+MF2='Goal':'trapmf',[0 0.01 0.19 0.2]
+MF3='RightofGoal':'trapmf',[0.19 0.2 3.14 3.15]
+
+[Input5]
+Name='GoalRange'
+Range=[0 100]
+NumMFs=4
+MF1='close':'trapmf',[5 10 30 35]
+MF2='far':'trapmf',[45 50 100 100]
+MF3='near':'trapmf',[30 35 45 50]
+MF4='veryclose':'trapmf',[0 0 5 10]
+
+[Input6]
+Name='GoalAngleLeftPole'
+Range=[-3.15 3.15]
+NumMFs=3
+MF1='LeftofGoal':'trapmf',[-3.15 -3.14 -0.2 -0.19]
+MF2='Goal':'trapmf',[-0.2 -0.19 0 0.01]
+MF3='RightofGoal':'trapmf',[0.01 0.1 3.14 3.15]
+
+[Input7]
+Name='TeamHeld'
+Range=[0 2]
+NumMFs=3
+MF1='NoHeld':'trapmf',[0 0 0.4 0.6]
+MF2='Team1':'trapmf',[0.4 0.6 1.4 1.6]
+MF3='Team2':'trapmf',[1.4 1.6 2 2]
+
+[Input8]
+Name='Pose_X'
+Range=[0 90]
+NumMFs=3
+MF1='OwnGoalArea':'trapmf',[0 0 25 35]
+MF2='CentreField':'trapmf',[25 35 45 55]
+MF3='OpponentGoalArea':'trapmf',[45 55 90 90]
+
+[Input9]
+Name='Pose_Theta'
+Range=[-181 181]
+NumMFs=5
+MF1='Opposite1':'trapmf',[-181 -181 -50.57 -49.42]
+MF2='Goal':'trapmf',[-22.98 -17.24 17.24 22.98]
+MF3='Opposite2':'trapmf',[49.42 50.57 181 181]
+MF4='Upper_End':'trapmf',[-50.57 -49.42 -20.11 -14.37]
+MF5='Lower_ENd':'trapmf',[14.37 20.11 49.42 50.57]
+
+[Input10]
+Name='Pose_Y'
+Range=[0 60]
+NumMFs=3
+MF1='Lower_Half':'trapmf',[0 0 14 16]
+MF2='Middle':'trapmf',[14 16 44 46]
+MF3='Upper_Half':'trapmf',[44 46 60 60]
+
+[Output1]
+Name='Velocity'
+Range=[-10 10]
+NumMFs=5
+MF1='MaxReverse':'trapmf',[-10 -10 -7 -5]
+MF2='Stop':'trimf',[-2 0 2]
+MF3='MaxForward':'trapmf',[5 7 10 10]
+MF4='Reverse':'trapmf',[-7 -5 -2 0]
+MF5='Forward':'trapmf',[0 2 5 7]
+
+[Output2]
+Name='rotVelocity'
+Range=[-3 3]
+NumMFs=5
+MF1='QuickTurnRight':'trapmf',[-3 -3 -1.8 -1.5]
+MF2='maintain':'trapmf',[-0.45 -0.3 0.3 0.45]
+MF3='QuickTurnLeft':'trapmf',[1.5 1.8 3 3]
+MF4='TurnRight':'trapmf',[-1.8 -1.5 -0.6 -0.3]
+MF5='TurnLeft':'trapmf',[0.3 0.6 1.5 1.8]
+
+[Output3]
+Name='KickPower'
+Range=[0 10]
+NumMFs=4
+MF1='Low':'trapmf',[0.1 1 3 4.5]
+MF2='Medium':'trapmf',[3 4.5 6 7.5]
+MF3='High':'trapmf',[6 7.5 10 10]
+MF4='Off':'trapmf',[0 0 0.05 0.1]
+
+[Rules]
+0 1 1 0 0 0 -2 0 0 0, 2 0 4 (1) : 1
+-5 2 1 0 0 0 -2 0 0 0, 2 0 4 (1) : 1
+0 3 1 0 0 0 -2 0 0 0, 3 0 4 (1) : 1
+0 4 1 0 0 0 -2 0 0 0, 3 0 4 (1) : 1
+1 0 1 0 0 0 -2 0 0 0, 0 4 4 (1) : 1
+2 0 1 0 0 0 -2 0 0 0, 0 5 4 (1) : 1
+3 0 1 0 0 0 -2 0 0 0, 0 3 4 (1) : 1
+4 0 1 0 0 0 -2 0 0 0, 0 1 4 (1) : 1
+0 0 2 3 0 0 0 0 0 0, 0 5 4 (1) : 1
+0 0 2 1 0 0 0 0 0 0, 0 4 4 (1) : 1
+0 0 2 2 0 0 0 0 0 0, 0 2 4 (1) : 1
+0 0 2 0 0 1 0 0 0 0, 0 4 4 (1) : 1
+0 0 2 0 0 3 0 0 0 0, 0 5 4 (1) : 1
+0 0 2 0 0 2 0 0 0 0, 0 2 4 (1) : 1
+0 0 2 0 2 0 0 0 0 0, 5 0 4 (1) : 1
+0 0 2 0 1 0 0 0 0 0, 5 0 4 (1) : 1
+0 0 2 0 3 0 0 0 0 0, 5 0 4 (1) : 1
+0 0 2 0 4 0 0 0 0 0, 2 0 4 (1) : 1
+0 0 2 3 0 1 0 -3 0 0, 0 1 4 (1) : 1
+0 0 2 1 0 3 0 -3 0 0, 0 3 4 (1) : 1
+5 2 1 0 0 0 0 0 0 0, 3 0 4 (1) : 1
+0 0 1 3 0 0 2 1 0 0, 0 5 4 (1) : 1
+0 0 1 3 0 0 2 2 0 0, 0 5 4 (1) : 1
+0 0 1 1 0 0 2 1 0 0, 0 4 4 (1) : 1
+0 0 1 1 0 0 2 2 0 0, 0 4 4 (1) : 1
+0 0 1 2 0 0 2 1 0 0, 0 2 4 (1) : 1
+0 0 1 2 0 0 2 2 0 0, 0 2 4 (1) : 1
+0 0 1 0 0 1 2 1 0 0, 0 4 4 (1) : 1
+0 0 1 0 0 1 2 2 0 0, 0 4 4 (1) : 1
+0 0 1 0 0 3 2 1 0 0, 0 5 4 (1) : 1
+0 0 1 0 0 3 2 2 0 0, 0 5 4 (1) : 1
+0 0 1 0 0 2 2 1 0 0, 0 2 4 (1) : 1
+0 0 1 0 0 2 2 2 0 0, 0 2 4 (1) : 1
+0 0 1 0 2 0 2 0 0 0, 3 0 4 (1) : 1
+0 0 1 0 1 0 2 0 0 0, 2 0 4 (1) : 1
+0 0 1 0 3 0 2 0 0 0, 3 0 4 (1) : 1
+0 0 1 3 0 1 2 -3 0 0, 0 3 4 (1) : 1
+0 0 1 1 0 3 2 -3 0 0, 0 1 4 (1) : 1
+1 0 1 0 0 0 2 3 0 0, 0 4 4 (1) : 1
+2 0 1 0 0 0 2 3 0 0, 0 5 4 (1) : 1
+3 0 1 0 0 0 2 3 0 0, 0 3 4 (1) : 1
+4 0 1 0 0 0 2 3 0 0, 0 1 4 (1) : 1
+4 0 1 0 0 0 2 3 0 0, 5 0 4 (1) : 1
+0 2 1 0 0 0 2 0 0 0, 2 0 4 (1) : 1
+0 0 2 0 1 0 2 0 2 2, 0 0 3 (1) : 1
+0 0 2 0 4 0 2 0 2 2, 0 0 3 (1) : 1
+0 0 2 0 1 0 2 0 4 3, 0 0 3 (1) : 1
+0 0 2 0 1 0 2 0 5 1, 0 0 3 (1) : 1
+0 0 2 0 4 0 2 0 4 3, 0 0 3 (1) : 1
+0 0 2 0 4 0 2 0 5 1, 0 0 3 (1) : 1
+5 2 1 0 0 0 2 0 0 0, 2 0 4 (1) : 1
